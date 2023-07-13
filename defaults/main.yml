@@ -7,7 +7,7 @@ kerberos_client__include_dir: /etc/krb5.conf.d
 kerberos_client__include_dirs: []
 kerberos_client__keytab_sanitize_tmp_file_pattern: /tmp/keytab.sanitized
 
-#client
+# client
 kerberos_client__realms: {}
 kerberos_client__defaults: {}
 kerberos_client__defaults_distribution: {}
