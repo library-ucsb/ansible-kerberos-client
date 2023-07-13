@@ -1,0 +1,4 @@
+---
+kerberos_client__packages_names:
+- krb5-user
+...
