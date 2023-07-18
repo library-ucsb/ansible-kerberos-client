@@ -1,5 +1,5 @@
 ---
-- name: Include the OS specific variables
+- name: Include OS specific variables
   include_vars: '{{ item }}'
   with_first_found:
     - files:
@@ -10,15 +10,19 @@
       skip: true
   tags: ['always']
 
-- name: Importing initialization tasks
+- name: Import initialization tasks
   import_tasks: init.yml
   tags: ['always']
 
-- name: Importing install tasks
+- name: Import install tasks
   import_tasks: install.yml
   tags: ['kerberos-client', 'kerberos-client-install']
 
-- name: Importing configuration tasks
+- name: Import configuration tasks
   import_tasks: configure.yml
   tags: ['kerberos-client', 'kerberos-client-configure']
+
+- name: Import deploy tasks
+  import_tasks: deploy.yml
+  when: kerberos_client__deploy | bool
 ...

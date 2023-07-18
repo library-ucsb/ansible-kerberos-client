@@ -1,0 +1,21 @@
+---
+- name: generate keytab
+  expect:
+    command: ktutil
+    responses:
+      ktutil:
+      - "addent -password -p {{ kerberos_client__keytab_principal }} -k 1 -e {{ kerberos_client__keytab_encryption }}"
+      - "wkt {{ kerberos_client__keytab_path }}"
+      - "quit"
+      Password: "{{ kerberos_client__keytab_password }}"
+  no_log: true
+
+- name: get initial ticket
+  shell: "kinit {{ kerberos_client__keytab_principal }} -k -t {{ kerberos_client__keytab_path }}"
+
+- name: setup ticket renewal
+  cron:
+    job: "/usr/bin/kinit {{ kerberos_client__keytab_principal }} -k -t {{ kerberos_client__keytab_path }}"
+    user: root
+    minute: 0
+...
