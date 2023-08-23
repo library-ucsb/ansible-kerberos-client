@@ -13,10 +13,17 @@
 - name: get initial ticket
   shell: "kinit {{ kerberos_client__keytab_principal }} -k -t {{ kerberos_client__keytab_path }}"
 
+- name: get ticket on boot
+  cron:
+    name: "Renew Kerberos ticket-granting-ticket on boot"
+    job: "/usr/bin/kinit {{ kerberos_client__keytab_principal }} -k -t {{ kerberos_client__keytab_path }}"
+    special_time: reboot
+
 - name: setup ticket renewal
   cron:
     name: "Renew Kerberos ticket-granting-ticket"
     job: "/usr/bin/kinit {{ kerberos_client__keytab_principal }} -k -t {{ kerberos_client__keytab_path }}"
     user: root
+    hour: *
     minute: 0
 ...
