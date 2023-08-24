@@ -24,6 +24,5 @@
     name: "Renew Kerberos ticket-granting-ticket"
     job: "/usr/bin/kinit {{ kerberos_client__keytab_principal }} -k -t {{ kerberos_client__keytab_path }}"
     user: root
-    hour: *
     minute: 0
 ...
