@@ -7,7 +7,7 @@
       - "addent -password -p {{ kerberos_client__keytab_principal }} -k -1 -e {{ kerberos_client__keytab_encryption }}"
       - "wkt {{ kerberos_client__keytab_path }}"
       - "quit"
-      Password: "{{ kerberos_client__keytab_password }}"
+      Password*: "{{ kerberos_client__keytab_password }}"
   no_log: true
 
 - name: get initial ticket
